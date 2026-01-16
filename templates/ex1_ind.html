@@ -171,16 +171,20 @@
 {% set size = 8 %}
 <table>
     {% for i in range(size) %}
+        {%if i%2 == 0%}
         <tr>
-            {% for j in range(size) %}
-                {% if (i+j)%2 == 0 %}
+            {% for j in range(3) %}
                     <td class="white"></td>
-                {%else%}
-                    <td class="black"></td>
-                {%endif%}
             {%endfor%}
         </tr>
-    {%endfor%}
+        {%else%}
+        <tr>
+            {% for j in range(3)%}
+            <td class="black"></td>
+            {%endfor%}
+        </tr>
+        {%endif%}
+        {%endfor%}
 </table>
 
 <style>
@@ -188,7 +192,13 @@
         width: 50px;
         height: 50px;
         border: 2px solid black;
-        background-color: black;
+        background-color: pink;
+    }
+    .black{
+        width: 50px;
+        height: 50px;
+        border: 2px solid black;
+        background-color: blue;
     }
 </style>
 </body>
