@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h4>Task 1</h4>
+{% set x,y = 3,2 %}
+{{(x**2+(y-6)/2.1*1.2)|round(2)}}
+<h4>Task 2</h4>
+{% set a,b = 5,1 %}
+{% set c = a-b %}
+{{ '{:.1%}'.format( c//3 ) }}
+<h4>Task 3</h4>
+{% set a,b = 25,76 %}
+{% if b >= 60 %}
+    {% set a,b = a+b//60, b%60 %}
+{% endif %}
+{% if a>=24 %}
+    {% set a = a%24 %}
+{% endif %}
+{% if b==0 %}
+    Ровно {{a}} час (a/ов)
+{% elif b == 30%}
+    Половина {{a+1}}
+{% elif b <= 15%}
+    Начало {{a+1}}
+{% elif b == 45 %}
+    Без 15-ти {{a+1}}
+{% else %}
+    {{a}} час (а/ов) {{b}} минут(а/ы)
+{% endif %}
+<h4>Task 4</h4>
+{% set a,b = 1,1 %}
+{% set c = 'кот'%}
+{% if 'кот' in c and b == 0%}
+    На 0 делить можно, мяу
+{%elif 'кот' == с%}
+    Шрёдингера
+{% elif 'кот' in c%}
+    Очевидный подсчёт
+{% else %}
+    {% if c == '/' and b == 0%}
+        ошибка
+    {% else %}
+        {{a}} {{c}} {{b}}
+    {% endif %}
+{% endif %}
+<h4>Task 5</h4>
+{% set count = [0]%}
+<table border="3px">
+    {%for i in ["да","устану","уставать", "будет"]%}
+    <tr>
+        <td>
+            {{loop.index}}
+        </td>
+        <td>
+            {{i}}
+        </td>
+        {% if i in "неустанууставать"%}
+            {% if count.append(count.pop()+1)%}{%endif%}
+        {%endif%}
+    </tr>
+    {%else%}
+        Ты настолько устал?
+    {%endfor%}
+    {%if count[0]==3%}
+        Как девиз жизни
+    {%endif%}
+
+<h4>Task 6</h4>
+{% set size, array = 10,[]%}
+{% for i in range(0,size) %}
+    {% set ar = [] %}
+    {% for j in range(0,size) %}
+        {% if i == j %}
+            {% set _ = ar.append(1) %}
+        {%else%}
+            {% set _ = ar.append(0) %}
+        {%endif%}
+    {%endfor%}
+     {% set _ = array.append(ar)%}
+{%endfor%}
+
+{%for i in range(0,size)%}
+<p>
+    {% for j in range(0,size) %}
+        {{array[i][j]}}
+    {%endfor%}
+</p>
+{%endfor%}
+<h4>Task 7</h4>
+{% macro to_be_or_not_to_be()%}
+    {% set x=range(0,2)|random %}
+    {% if x == 1 %}
+        Быть
+    {% else %}
+        Не быть
+    {% endif %}
+{%endmacro%}
+{{to_be_or_not_to_be()}}
+<h4>Task 8</h4>
+{% set sum_e = [0]%}
+{% macro get_sum_e()%}
+    {% for value in varargs %}
+        {% if sum_e.append(sum_e.pop()+value['m']+value['c']**2) %}
+        {%endif%}
+    {%endfor%}
+    {{sum_e[0]}}
+{%endmacro%}
+{% set a,b,c = {'m':3, 'c':5}, {'m':5, 'c':3}, {'m':1, 'c':7} %}
+{{get_sum_e(a,b,c)}}
+<h4>Task 9</h4>
+{% set size = 10 %}
+< table border = "1">
+{% for i in range(1, size+1)%}
+    <tr>
+    {% for j in range(1, size+1) %}
+        <td>{{ i * j }}</td>
+    {%endfor%}
+    </tr>
+{% endfor %}
+</table>
+<h4>Task 10</h4>
+{% set size = 8 %}
+<table>
+    {% for i in range(size) %}
+        <tr>
+            {% for j in range(size) %}
+                {% if (i+j)%2 == 0 %}
+                    <td class="white"></td>
+                {%else%}
+                    <td class="black"></td>
+                {%endif%}
+            {%endfor%}
+        </tr>
+    {%endfor%}
+</table>
+
+<style>
+    .white{
+        width: 50px;
+        height: 50px;
+        border: 2px solid black;
+        background-color: black;
+    }
+</style>
+<h4>Task 11</h4>
+{% set size = 7%}
+{% set triangle = [[1]]%}
+{% for i in range(1, size)%}
+    {%set row = [1]%}
+    {%for j in range(1, i)%}
+        {%set value = triangle[i-1][j-1]+triangle[i-1][j]%}
+        {%set _ = row.append(value)%}
+    {%endfor%}
+    {%set _ = row.append(1)%}
+    {%set _ = triangle.append(row)%}
+{%endfor%}
+{%for row in triangle%}
+    <div style="text-align: center;">
+        {%for n in row%}
+            <span style="display: inline-block; width: 30px;">
+                {{n}}
+            </span>
+        {%endfor%}
+    </div>
+{%endfor%}
+<h4>Task 12</h4>
+{% set size = 8 %}
+<table>
+    {% for i in range(size) %}
+        <tr>
+            {% for j in range(size) %}
+                {% if (i+j)%2 == 0 %}
+                    <td class="white"></td>
+                {%else%}
+                    <td class="black"></td>
+                {%endif%}
+            {%endfor%}
+        </tr>
+    {%endfor%}
+</table>
+
+<style>
+    .white{
+        width: 50px;
+        height: 50px;
+        border: 2px solid black;
+        background-color: black;
+    }
+</style>
+</body>
+</html>
